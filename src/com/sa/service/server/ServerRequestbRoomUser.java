@@ -12,33 +12,27 @@
  * 版本:	 [v1.0]
  *
  */
-package com.sa.service.client;
+package com.sa.service.server;
 
 import java.util.TreeMap;
 
+import com.sa.base.ServerManager;
 import com.sa.net.Packet;
-import com.sa.net.PacketHeadInfo;
 import com.sa.net.PacketType;
 
-public class ClientResponebRoom extends Packet {
-
-	public ClientResponebRoom() {
-	}
-
-	public ClientResponebRoom(PacketHeadInfo packetHead, TreeMap<Integer, Object> options) {
-		this.setOptions(options);
-		this.setPacketHead(packetHead);
-		this.setOption(1, String.valueOf(this.getOption(1)));
-		this.setOption(253, String.valueOf(System.currentTimeMillis()));
-	}
-
+public class ServerRequestbRoomUser extends Packet {
+	public ServerRequestbRoomUser(){}
+	
 	@Override
 	public PacketType getPacketType() {
-		return PacketType.ClientResponebRoom;
+		return PacketType.ServerRequestbRoomUser;
 	}
 
 	@Override
 	public void execPacket() {
-		//System.out.println("RECEIVE ClientResponebRoom " + this.getOption(1));
+		System.out.println("SEND ServerRequestbRoomUser " + this.getFromUserId() + "[" + this.getOption(1) + "]");
+
+		ServerManager.INSTANCE.sendServerRequest(this);
 	}
+
 }

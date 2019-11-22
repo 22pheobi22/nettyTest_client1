@@ -23,7 +23,7 @@ public class ClientLoginOut extends Packet {
 
 	@Override
 	public void execPacket() {
-		System.out.println(PacketType.ClientLoginOut);
+		//System.out.println(PacketType.ClientLoginOut);
 	}
 
 	@Override

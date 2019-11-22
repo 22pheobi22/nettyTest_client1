@@ -22,7 +22,7 @@ import com.sa.net.PacketType;
 public class ClientResponebShareGet extends Packet {
 	@Override
 	public void execPacket() {
-		System.out.println(this.toString());
+		//System.out.println(this.toString());
 	}
 
 	@Override

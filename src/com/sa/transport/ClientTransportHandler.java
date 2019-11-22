@@ -16,7 +16,7 @@ public class ClientTransportHandler extends ChannelInboundHandlerAdapter {
 	private int index = 0;
 	//private String roomId = "roomId";
 	private String roomId = "22421,22422,22423,";
-
+	
 	public ClientTransportHandler(){ }
 	
 	public ClientTransportHandler(String roomId, int index){

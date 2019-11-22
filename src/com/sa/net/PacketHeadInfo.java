@@ -61,4 +61,10 @@ public class PacketHeadInfo {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "PacketHeadInfo [transactionId=" + transactionId + ", roomId=" + roomId + ", fromUserId=" + fromUserId
+				+ ", toUserId=" + toUserId + ", status=" + status + "]";
+	}
+
 }

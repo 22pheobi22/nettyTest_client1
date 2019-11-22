@@ -20,12 +20,12 @@ import com.sa.net.Packet;
 import com.sa.net.PacketHeadInfo;
 import com.sa.net.PacketType;
 
-public class ClientResponebRoom extends Packet {
+public class ClientResponebOne extends Packet {
 
-	public ClientResponebRoom() {
+	public ClientResponebOne() {
 	}
 
-	public ClientResponebRoom(PacketHeadInfo packetHead, TreeMap<Integer, Object> options) {
+	public ClientResponebOne(PacketHeadInfo packetHead, TreeMap<Integer, Object> options) {
 		this.setOptions(options);
 		this.setPacketHead(packetHead);
 		this.setOption(1, String.valueOf(this.getOption(1)));
@@ -34,11 +34,11 @@ public class ClientResponebRoom extends Packet {
 
 	@Override
 	public PacketType getPacketType() {
-		return PacketType.ClientResponebRoom;
+		return PacketType.ClientResponebOne;
 	}
 
 	@Override
 	public void execPacket() {
-		//System.out.println("RECEIVE ClientResponebRoom " + this.getOption(1));
+		//System.out.println("RECEIVE ClientResponebOne " + this.getOption(1));
 	}
 }

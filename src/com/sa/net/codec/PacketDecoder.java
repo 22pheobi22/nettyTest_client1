@@ -43,6 +43,7 @@ public class PacketDecoder extends LengthFieldBasedFrameDecoder{
 		if(null == frame || frame.readableBytes() <= 0) return null ;
 
 		short packetType = frame.readShort();
+		System.out.println("packetType:" + packetType);
 		Integer transactionId = frame.readInt();
 		String roomId = readUTF8(frame);
 		String fromUserId = readUTF8(frame);
