@@ -30,7 +30,7 @@ public class ServerRequestbRoomUser extends Packet {
 
 	@Override
 	public void execPacket() {
-		System.out.println("SEND ServerRequestbRoomUser " + this.getFromUserId() + "[" + this.getOption(1) + "]");
+		//System.out.println("SEND ServerRequestbRoomUser " + this.getFromUserId() + "[" + this.getOption(1) + "]");
 
 		ServerManager.INSTANCE.sendServerRequest(this);
 	}

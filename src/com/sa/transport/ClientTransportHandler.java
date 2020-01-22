@@ -3,6 +3,7 @@ package com.sa.transport;
 import java.util.TreeMap;
 
 import com.sa.base.BaseDataPool;
+import com.sa.base.ServerManager;
 import com.sa.net.Packet;
 import com.sa.net.PacketManager;
 import com.sa.service.server.ServerLogin;
@@ -15,7 +16,7 @@ import io.netty.channel.ChannelPromise;
 public class ClientTransportHandler extends ChannelInboundHandlerAdapter {
 	private int index = 0;
 	//private String roomId = "roomId";
-	private String roomId = "22421,22422,22423,";
+	private String roomId = "22421,22423,";
 	
 	public ClientTransportHandler(){ }
 	
@@ -44,7 +45,8 @@ public class ClientTransportHandler extends ChannelInboundHandlerAdapter {
 		BaseDataPool.USER_ROOM_MAP.put(fromUserId, roomId);
 		BaseDataPool.USER_CHANNEL_MAP.put(fromUserId, ctx);
 		
-		serverLogin.execPacket();
+		ServerManager.INSTANCE.sendServerRequest(serverLogin);
+		//serverLogin.execPacket();
 	}
 
 	@Override

@@ -14,6 +14,7 @@ public class ClientLogin extends Packet{
 
 	@Override
 	public void execPacket() {
+		System.out.println();
 	}
 
 }

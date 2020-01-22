@@ -7,7 +7,7 @@ public class ClientConfigs {
 	//public static String REMOTE_SERVER_IP = "39.107.26.80";
 	public static String REMOTE_SERVER_IP = "192.168.21.115";
 	/**  服务器端口 */
-	public static int REMOTE_SERVER_PORT = 8080;//8080
+	public static int REMOTE_SERVER_PORT = 8180;//8080
 
 	/**  客户端断线重连最大尝试次数 */
 	public final static int MAX_RECONNECT_TIMES = 10;
