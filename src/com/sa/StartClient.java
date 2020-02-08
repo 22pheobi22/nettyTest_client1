@@ -226,7 +226,7 @@ public class StartClient {
 			serverRequestbRoomChat.setTransactionId(15724);
 			serverRequestbRoomChat.setStatus(0);
 			TreeMap<Integer,Object> roomChatMap = new TreeMap<>();
-			roomChatMap.put(1, "1");//起始页
+			roomChatMap.put(1, "0");//起始页
 			roomChatMap.put(2, "10");//每页显示条数
 			serverRequestbRoomChat.setOptions(roomChatMap);
 
@@ -249,6 +249,7 @@ public class StartClient {
 			ServerRequestcAgreeApplyAuth serverRequestcAgreeApplyAuth = new ServerRequestcAgreeApplyAuth();
 			serverRequestcAgreeApplyAuth.setFromUserId("T366");
 			serverRequestcAgreeApplyAuth.setRoomId("22421,22423,");
+			serverRequestcAgreeApplyAuth.setToUserId("147081");
 			serverRequestcAgreeApplyAuth.setTransactionId(15724);
 			serverRequestcAgreeApplyAuth.setStatus(0);
 			TreeMap<Integer,Object> agreeApplyAuthMap = new TreeMap<>();
@@ -366,7 +367,7 @@ public class StartClient {
 			serverRequestbShareUpd2.setStatus(0);
 			TreeMap<Integer,Object> updateShareMap2 = new TreeMap<>();
 			updateShareMap2.put(1, "starlist");
-			updateShareMap2.put(8, "{'20147080':88}");
+			updateShareMap2.put(8, "{'20147080':8}");
 			updateShareMap2.put(3, "n");
 			updateShareMap2.put(4, "upd.value");
 			updateShareMap2.put(2, "shareUpdValue");
