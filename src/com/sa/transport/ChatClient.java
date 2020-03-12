@@ -22,15 +22,19 @@ public class ChatClient implements Runnable {
 	private int port;
 	private String roomId;
 	private int index;
+	private String userid;
+	private Integer transactionId;
 
 	/** 当前重接次数*/
 	private int reconnectTimes = 0;
 	
-	public ChatClient(String host,int port, String roomId, int index) {
+	public ChatClient(String host,int port, String roomId, int index,String userid,Integer transactionId) {
 		this.host = host;
 		this.port = port;
 		this.roomId = roomId;
 		this.index = index;
+		this.userid = userid;
+		this.transactionId = transactionId;
 	}
 
 	public void run() {
@@ -57,7 +61,7 @@ public class ChatClient implements Runnable {
                     pipeline.addLast(new PacketEncoder());
                     //pipeline.addLast(new IdleStateHandler(0,0,5));
                     pipeline.addLast(new HeartBeatHandler());
-                    pipeline.addLast(new ClientTransportHandler(roomId, index));  
+                    pipeline.addLast(new ClientTransportHandler(roomId, index,userid,transactionId));  
                 }  
                   
             });  

@@ -15,22 +15,26 @@ import io.netty.channel.ChannelPromise;
 
 public class ClientTransportHandler extends ChannelInboundHandlerAdapter {
 	private int index = 0;
-	//private String roomId = "roomId";
-	private String roomId = "22421,22423,";
+	private String roomId = "roomId";
+	//private String roomId = "22421,22423,";
+	private String userId;
+	private Integer transactionId;
 	
 	public ClientTransportHandler(){ }
 	
-	public ClientTransportHandler(String roomId, int index){
+	public ClientTransportHandler(String roomId, int index,String userId,Integer transactionId){
 		this.index = index;
 		this.roomId = roomId;
+		this.transactionId = transactionId;
+		this.userId = userId;
 	}
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) {
-		Integer transactionId = (int) (1 + Math.random()*100000000);
+		//Integer transactionId = (int) (1 + Math.random()*100000000);
 		//String fromUserId = roomId + "-" + index + "-" + System.currentTimeMillis() + "-" + transactionId;
-		String fromUserId = "T366";
-
+		//String fromUserId = "T366";
+		String fromUserId = userId;
 		ServerLogin serverLogin = new ServerLogin(transactionId, roomId, fromUserId, "", 0);
 		TreeMap<Integer, Object> options = new TreeMap<>(); // 消息记录集
 		options.put(1, fromUserId);
@@ -38,8 +42,8 @@ public class ClientTransportHandler extends ChannelInboundHandlerAdapter {
 		options.put(2, "1");
 		options.put(3, fromUserId);
 		options.put(4, "icon");
-		//options.put(5, "agoraId");
-		options.put(5, "10366");
+		options.put(5, "agoraId");
+		//options.put(5, "10366");
 		serverLogin.setOptions(options);
 		
 		BaseDataPool.USER_ROOM_MAP.put(fromUserId, roomId);
