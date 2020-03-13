@@ -522,7 +522,7 @@ public class StartClient {
 			map.put(roomId, fromUserId);
 			//new Thread(new ChatClient(ClientConfigs.REMOTE_SERVER_IP, ClientConfigs.REMOTE_SERVER_PORT, roomId, i+1,fromUserId,transactionId)).start();
 		}*/
-		map.put(key, value);
+		//map.put(key, value);
 		menu();
 
 		//System.exit(0);
