@@ -12,6 +12,7 @@ import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.timeout.IdleStateHandler;
 
 import java.net.InetSocketAddress;
+import java.util.concurrent.CountDownLatch;
 
 import com.sa.net.codec.PacketDecoder;
 import com.sa.net.codec.PacketEncoder;
@@ -21,24 +22,30 @@ public class ChatClient implements Runnable {
 	private String host;
 	private int port;
 	private String roomId;
-	private int index;
 	private String userid;
-	private Integer transactionId;
+	private CountDownLatch la;
 
 	/** 当前重接次数*/
 	private int reconnectTimes = 0;
 	
-	public ChatClient(String host,int port, String roomId, int index,String userid,Integer transactionId) {
+	public ChatClient(CountDownLatch la,String host,int port, String roomId, String userId) {
 		this.host = host;
 		this.port = port;
 		this.roomId = roomId;
-		this.index = index;
-		this.userid = userid;
-		this.transactionId = transactionId;
+		this.userid = userId;
+		this.la = la;
+	}
+	
+	public ChatClient(String host,int port, String roomId, String userId) {
+		this.host = host;
+		this.port = port;
+		this.roomId = roomId;
+		this.userid = userId;
 	}
 
 	public void run() {
 		try {
+			//la.await();
 			connect(this.host, this.port);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,7 +68,7 @@ public class ChatClient implements Runnable {
                     pipeline.addLast(new PacketEncoder());
                     //pipeline.addLast(new IdleStateHandler(0,0,5));
                     pipeline.addLast(new HeartBeatHandler());
-                    pipeline.addLast(new ClientTransportHandler(roomId, index,userid,transactionId));  
+                    pipeline.addLast(new ClientTransportHandler(roomId,userid));  
                 }  
                   
             });  

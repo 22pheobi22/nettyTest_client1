@@ -1,6 +1,7 @@
 package com.sa.base;
 
 import com.sa.net.Packet;
+import com.sa.util.LogOutPrint;
 
 import io.netty.channel.ChannelHandlerContext;
 
@@ -16,5 +17,10 @@ public enum ServerManager {
 		
 //		System.out.println(request.toString());
 	}
-
+	public synchronized void log(Packet request) {
+		String str = "============================================\r\n"
+				+ "接收" + "\r\n" + this.toString()
+				+ "============================================\r\n";
+			LogOutPrint.log("/logs", str);
+	}
 }

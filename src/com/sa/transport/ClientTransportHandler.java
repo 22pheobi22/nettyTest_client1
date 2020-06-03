@@ -3,10 +3,10 @@ package com.sa.transport;
 import java.util.TreeMap;
 
 import com.sa.base.BaseDataPool;
-import com.sa.base.ServerManager;
 import com.sa.net.Packet;
 import com.sa.net.PacketManager;
 import com.sa.service.server.ServerLogin;
+import com.sa.util.LogOutPrint;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -14,52 +14,54 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
 
 public class ClientTransportHandler extends ChannelInboundHandlerAdapter {
-	private int index = 0;
 	private String roomId = "roomId";
-	//private String roomId = "22421,22423,";
-	private String userId;
-	private Integer transactionId;
+	private String userId="-1";
 	
+	//private String roomId = "22421";
+
 	public ClientTransportHandler(){ }
 	
-	public ClientTransportHandler(String roomId, int index,String userId,Integer transactionId){
-		this.index = index;
+	public ClientTransportHandler(String roomId, String userId){
 		this.roomId = roomId;
-		this.transactionId = transactionId;
 		this.userId = userId;
 	}
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) {
 		//Integer transactionId = (int) (1 + Math.random()*100000000);
-		//String fromUserId = roomId + "-" + index + "-" + System.currentTimeMillis() + "-" + transactionId;
-		//String fromUserId = "T366";
+		//String fromUserId = "147080";
 		String fromUserId = userId;
-		ServerLogin serverLogin = new ServerLogin(transactionId, roomId, fromUserId, "", 0);
+		ServerLogin serverLogin = new ServerLogin(999, roomId, fromUserId, "", 0);
 		TreeMap<Integer, Object> options = new TreeMap<>(); // 消息记录集
 		options.put(1, fromUserId);
 		//options.put(2, "STUDENT");
-		options.put(2, "1");
+		options.put(2, "TEACHER");
 		options.put(3, fromUserId);
 		options.put(4, "icon");
 		options.put(5, "agoraId");
-		//options.put(5, "10366");
+		//options.put(5, "20147080");
 		serverLogin.setOptions(options);
 		
 		BaseDataPool.USER_ROOM_MAP.put(fromUserId, roomId);
 		BaseDataPool.USER_CHANNEL_MAP.put(fromUserId, ctx);
-		
-		ServerManager.INSTANCE.sendServerRequest(serverLogin);
-		//serverLogin.execPacket();
+		String str = "============================================\r\n"
+				+ "发送" + "\r\n" + serverLogin.toString()
+				+ "============================================\r\n";
+		LogOutPrint.log("/log", str);
+		serverLogin.execPacket();
 	}
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception{
 		Packet  packet = (Packet) msg;
+		//System.out.println("【"+ctx+"】");
 		System.out.println(packet.toString());
 //		packet.printPacket(ClientConfigs.CONSOLE_FLAG, "", packet.toString());
-
+		String str = "============================================\r\n"
+				+ "接收" + "\r\n" + packet.toString()
+				+ "============================================\r\n";
+		LogOutPrint.log("/log", str);
 		PacketManager.INSTANCE.execPacket(packet);
 	}
 

@@ -31,13 +31,13 @@ public class ServerRequestbOne extends Packet {
 	@Override
 	public void execPacket() {
 		//System.out.println("SEND ServerRequestbOne " + this.getFromUserId() + "[" + this.getOption(1) + "]");
-		this.setFromUserId("T366");
-		this.setRoomId("22421,22423,");
+		this.setFromUserId("R2T2");
+		this.setRoomId("R1");
 		this.setTransactionId(15724);
 		this.setStatus(0);
-		this.setToUserId("147080");
+		this.setToUserId("R1S1");
 		TreeMap<Integer,Object> treeMap = new TreeMap<>();
-		treeMap.put(1, "{'command':'open','content':'我是教师T366，我给一班22421第一147080发了ServerRequestbOne','domain':'i-clicker','domain_id':37}");
+		treeMap.put(1, "{'command':'open','content':'我是教师R2T2，我给R1S1发了ServerRequestbOne','domain':'i-clicker','domain_id':37}");
 		this.setOptions(treeMap);
 		ServerManager.INSTANCE.sendServerRequest(this);
 	}
